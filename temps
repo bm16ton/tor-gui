@@ -1,0 +1,14 @@
+--==[ torctl.sh by blackarch.org ]==--
+
+[!] WARNING: restoring sysctl rules
+[+] restored sysctl rules
+[!] WARNING: restoring iptables rules
+[+] restored iptables rules
+[!] WARNING: tor is active
+[*] stopping tor service
+[+] stopped tor service
+[!] WARNING: restoring tor config
+[+] restored tor config
+[!] WARNING: restoring nameservers
+[+] restored nameservers
+Connection successfully reapplied to device 'wlan0'.

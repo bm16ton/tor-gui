@@ -1,0 +1,108 @@
+#!/bin/sh
+
+echo "" > /var/lib/tor-gui/temps
+export print2="'{print $2}'"
+GTKDIALOG=gtkdialog
+
+MAIN_DIALOG='
+<window title="Tor GUI" resizable="false">
+	<vbox width-request="380" width="350">
+		<vbox homogeneous="false" space-expand="true" space-fill="true" border-width="10">
+		<expander expanded="false" use-underline="false">
+			<vbox scrollable="true" width="350" height="400">
+				<text wrap="false" xalign="0" file-monitor="true" auto-refresh="true">
+					<variable>txt0</variable>
+					<label>Tor label</label>
+					<input file>"/var/lib/tor-gui/temps"</input>
+				</text>
+			</vbox>
+		<label>tor start stop messages</label>
+        <variable>exp0</variable>
+		</expander>
+		<vbox homogeneous="true" space-expand="false" space-fill="false">
+		<expander expanded="false" use-underline="false">
+			<vbox width="350" height="100">
+				<text wrap="false" xalign="0" selectable="true">
+					<variable export="false">txt1</variable>
+					<label>mac addrs</label>
+					<input>list-macs.sh</input>
+				</text>
+			</vbox>
+		<label>MAC addresses</label>
+        <variable>mac0</variable>
+		</expander>
+		</vbox>
+<hseparator></hseparator>
+<hbox homogeneous="true" space-expand="false" space-fill="false">
+		<text xalign="0"><input>echo "STATUS;"</input></text>
+		<text xalign="0">
+        <variable>status</variable>
+		<input>curl -s https://check.torproject.org/ | grep -m 1 Congratulations > /dev/null && echo "Congratulations Tor ACTIVE" || echo "Tor NOT ACTIVE"</input></text>
+        </hbox>
+        <hbox homogeneous="true" space-expand="false" space-fill="false">
+        <text xalign="0"><input>echo Public IP;</input></text>
+        		<text xalign="0">
+		<variable>extip</variable>
+		<input>curl -s https://ipinfo.io/ip</input></text>
+		</hbox>
+		<hbox homogeneous="true" space-expand="false" space-fill="false">
+        <text xalign="0"><input>echo "default net interface"</input></text>
+
+
+		<text xalign="0">
+		<variable>defint</variable>
+		<input>default-net-interface.sh</input></text>
+		</hbox>
+		        </vbox>
+	<hbox homogeneous="false" space-expand="false" space-fill="false">
+			<button>
+			    <label>START Tor</label>
+			    <action condition="active_is_false(exp0)">activate:exp0</action>
+			    <action>"systemctl stop tor.service"</action>
+				<action>"torctl start > /var/lib/tor-gui/temps"</action>
+				<action>refresh:status</action>
+				<action>sleep 1</action>
+				<action>refresh:extip</action>
+			</button>
+			<button>
+			    <label>STOP Tor</label>
+			    <action condition="active_is_false(exp0)">activate:exp0</action>
+				<action>"torctl stop > /var/lib/tor-gui/temps"</action>
+				<action>refresh:status</action>
+				<action>refresh:extip</action>
+			</button>
+		</hbox>
+
+		<hbox  homogeneous="false" space-expand="false" space-fill="false">
+		<button xalign="0">
+	    <label>new tor ip</label>
+		<action>"systemctl stop tor.service"</action>
+		<action>"systemctl start tor.service"</action>
+		<action>sleep 1 </action>
+		<action>refresh:extip</action>
+		</button>
+		<button xalign="0">
+	    <label>Change MAC</label>
+	    <action>torctl chngmac</action>
+	    <action>refresh:txt1</action>
+	    <action>refresh:mac0</action>
+	    </button>
+	    <button xalign="0">
+	    <label>Revert MAC</label>
+	    <action>torctl rvmac</action>
+	    </button>
+	    </hbox>
+				<hbox>
+			<button cancel></button>
+			<button ok></button>
+		</hbox>
+	</vbox>
+</window>
+'
+export MAIN_DIALOG
+
+case $1 in
+	-d | --dump) echo "$MAIN_DIALOG" ;;
+	*) $GTKDIALOG --program=MAIN_DIALOG ;;
+esac
+
