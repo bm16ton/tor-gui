@@ -53,5 +53,5 @@ sudo chmod +x /usr/local/bin/tor-gui
 sudo mkdir /var/lib/tor-gui
 sudo touch /var/lib/tor-gui/temps
 sudo cp torctl-auto* /etc/systemd/system/
-Echo "Reboot, then from command line enter   sudo tor-gui"
+echo "Reboot, then from command line enter   sudo tor-gui"
 
