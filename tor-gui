@@ -1,7 +1,8 @@
 #!/bin/sh
 
 echo "" > /var/lib/tor-gui/temps
-export print2="'{print $2}'"
+echo "" > /var/lib/tor-gui/macs
+list-macs.sh
 GTKDIALOG=gtkdialog
 
 MAIN_DIALOG='
@@ -22,10 +23,10 @@ MAIN_DIALOG='
 		<vbox homogeneous="true" space-expand="false" space-fill="false">
 		<expander expanded="false" use-underline="false">
 			<vbox width="350" height="100">
-				<text wrap="false" xalign="0" selectable="true">
-					<variable export="false">txt1</variable>
+				<text wrap="false" xalign="0" selectable="true" file-monitor="true" auto-refresh="true">
+					<variable>txt1</variable>
 					<label>mac addrs</label>
-					<input>list-macs.sh</input>
+                    <input file>/var/lib/tor-gui/macs</input>
 				</text>
 			</vbox>
 		<label>MAC addresses</label>
@@ -68,6 +69,9 @@ MAIN_DIALOG='
 			    <label>STOP Tor</label>
 			    <action condition="active_is_false(exp0)">activate:exp0</action>
 				<action>"torctl stop > /var/lib/tor-gui/temps"</action>
+				<action>systemctl is-active --quiet sshd.service && systemctl restart sshd.service</action>
+				<action>systemctl is-active --quiet ssh.service && systemctl restart ssh.service</action>
+				<action>systemctl restart networking.service</action>
 				<action>refresh:status</action>
 				<action>refresh:extip</action>
 			</button>
