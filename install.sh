@@ -24,6 +24,8 @@ secure-delete \
 procps \
 coreutils
 
+cp tor-gui.svg /usr/share/icons/hicolor/scalable/apps/
+gtk-update-icon-cache -f -i /usr/share/icons/hicolor
 cd /usr/bin/
 mv gcc gcc.bk
 mv g++ g++.bk
@@ -42,6 +44,7 @@ mv gcc.bk gcc
 mv g++.bk g++
 mv cpp.bk cpp
 cd -
+cp tor-gui.desktop /usr/share/applications/
 sudo cp list-macs.sh /usr/local/bin/
 sudo cp default-net-interface.sh /usr/local/bin/
 sudo cp torctl /usr/local/bin/
@@ -50,6 +53,7 @@ sudo chmod +x /usr/local/bin/list-macs.sh
 sudo chmod +x /usr/local/bin/default-net-interface.sh
 sudo chmod +x /usr/local/bin/torctl
 sudo chmod +x /usr/local/bin/tor-gui
+sudo chmod +x /usr/share/applications/tor-gui.desktop
 sudo mkdir /var/lib/tor-gui
 sudo touch /var/lib/tor-gui/temps
 sudo cp torctl-auto* /etc/systemd/system/

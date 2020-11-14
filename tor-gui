@@ -6,12 +6,12 @@ list-macs.sh
 GTKDIALOG=gtkdialog
 
 MAIN_DIALOG='
-<window title="Tor GUI" resizable="false">
+<window title="Tor GUI" icon-name="tor-gui" resizable="false">
 	<vbox width-request="380" width="350">
 		<vbox homogeneous="false" space-expand="true" space-fill="true" border-width="10">
 		<expander expanded="false" use-underline="false">
 			<vbox scrollable="true" width="350" height="400">
-				<text wrap="false" xalign="0" file-monitor="true" auto-refresh="true">
+				<text wrap="false" xalign="0" file-monitor="true" auto-refresh="true" selectable="true">
 					<variable>txt0</variable>
 					<label>Tor label</label>
 					<input file>"/var/lib/tor-gui/temps"</input>
