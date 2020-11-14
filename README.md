@@ -12,7 +12,7 @@ The stock no icon, icon bothered me so I grabbed this one,
 https://www.flaticon.com/free-icon/hierarchy_2620378
 and it installs it now. Also the .desktop file so it will show up in menu internet/network. it lods with pkexec
 
-the tor-gui-gtk3 file is a WIP gtkdialog gtk3 version. Which currently looks better. goto;
+the tor-gui-gtk3 file is a WIP gtkdialog gtk3 version.Theres currently no difference but if u wann try goto;
 https://github.com/bm16ton/gtkdialog
 and follow the instructions for gtk3. then either copy that binary to /usr/local/bin/gtkdialog
 or copy it to /usr/local/bin/gtkdialog-gtk and edit tor-gui line six from;
