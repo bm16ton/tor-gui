@@ -495,7 +495,7 @@ stop() {
 #    systemctl stop networking.service
 #    sleep 1.5
 #    systemctl start networking.service
-     nmcli device reapply $(ip route list | grep default | awk '{print $5}')
+     nmcli device reapply $(ip route list | grep -m 1 default | awk '{print $5}')
 }
 
 chngid() {
