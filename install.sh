@@ -22,6 +22,7 @@ iptables \
 iproute2 \
 secure-delete \
 procps \
+curl \
 coreutils
 
 cp tor-gui.svg /usr/share/icons/hicolor/scalable/apps/
