@@ -38,7 +38,7 @@ MAIN_DIALOG='
 		<text xalign="0"><input>echo "STATUS;"</input></text>
 		<text xalign="0">
         <variable>status</variable>
-		<input>curl -s https://check.torproject.org/ | grep -m 1 Congratulations > /dev/null && echo "Congratulations Tor ACTIVE" || echo "Tor NOT ACTIVE"</input></text>
+		<input>sleep 2 ; curl -s https://check.torproject.org/ | grep -m 1 Congratulations > /dev/null && echo "Congratulations Tor ACTIVE" || echo "Tor NOT ACTIVE"</input></text>
         </hbox>
         <hbox homogeneous="true" space-expand="false" space-fill="false">
         <text xalign="0"><input>echo Public IP;</input></text>
