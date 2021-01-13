@@ -38,7 +38,7 @@ cd -
 git clone https://github.com/bm16ton/gtkdialog.git
 cd gtkdialog
 dpkg-buildpackage -b -j$(nproc)
-dpkg -i ../gtkdialog_0.8.3-3mx17+16_*.deb
+dpkg -i ../gtkdialog_0.8.3*.deb
 cd ..
 cd /usr/bin/
 mv gcc.bk gcc
